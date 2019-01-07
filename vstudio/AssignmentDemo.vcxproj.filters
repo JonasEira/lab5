@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\projects\assignment\code\assignmentapp.cc" />
+    <ClCompile Include="..\projects\assignment\code\main.cc" />
+    <ClCompile Include="..\projects\assignment\code\Matrix2D.cpp" />
+    <ClCompile Include="..\projects\assignment\code\Shape.cpp" />
+    <ClCompile Include="..\projects\assignment\code\Square.cpp" />
+    <ClCompile Include="..\projects\assignment\code\Triangle.cpp" />
+    <ClCompile Include="..\projects\assignment\code\Vector2D.cpp" />
+    <ClCompile Include="..\projects\assignment\code\Circle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\projects\assignment\code\assignmentapp.h" />
+    <ClInclude Include="..\projects\assignment\code\Circle.h" />
+    <ClInclude Include="..\projects\assignment\code\Matrix2D.h" />
+    <ClInclude Include="..\projects\assignment\code\Shape.h" />
+    <ClInclude Include="..\projects\assignment\code\Square.h" />
+    <ClInclude Include="..\projects\assignment\code\Triangle.h" />
+    <ClInclude Include="..\projects\assignment\code\Vector2D.h" />
+  </ItemGroup>
+</Project>
