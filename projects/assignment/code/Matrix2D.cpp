@@ -43,12 +43,6 @@ void Matrix2D::setData(float x1, float y1, float x2, float y2)
 	this->data[1][1] = y2;
 }
 
-Matrix2D Matrix2D::transform(Vector2D & v, Matrix2D & m)
-{
-	Matrix2D vect;
-	vect.setData(v.getX(), 0.0, 0.0, v.getY());
-	return vect*m;
-}
 
 Matrix2D Matrix2D::rotate(float radians)
 {
@@ -80,6 +74,14 @@ void transpose(Matrix2D & m)
 	trans_m.setData(1.0, -1.0, -1.0, 1.0);
 	m = tmp * trans_m;
 }
+
+Matrix2D translate(Vector2D & v, Matrix2D & m)
+{
+	Matrix2D vect;
+	vect.setData(v.getX(), 0.0, 0.0, v.getY());
+	return vect*m;
+}
+
 Matrix2D unity()
 {
 	Matrix2D m;

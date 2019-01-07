@@ -4,6 +4,8 @@
 //------------------------------------------------------------------------------
 #include "config.h"
 #include "assignmentapp.h"
+#include <iostream>
+#include <math.h>
 
 namespace Assignment
 {
@@ -29,26 +31,26 @@ AssignmentApp::~AssignmentApp()
 */
 
 void AssignmentApp::addCircle(float r, float x, float y) {
-	Vector2D pos = Vector2D(0.5f, 0.0f);
+	Vector2D pos;
 	Circle circle;
-	circle = Circle(0.2f);
-	pos = Vector2D(0.0f, 0.0f);
+	circle = Circle(r);
+	pos = Vector2D(x, y);
 	circle.setPosition(pos);
 	circles.emplace_back(circle);
 }
 void AssignmentApp::addTriangle(float b, float h, float x, float y) {
-	Vector2D pos = Vector2D(0.5f, 0.0f);
+	Vector2D pos;
 	Triangle tri;
-	tri = Triangle(0.2f, 0.2f);
-	pos = Vector2D(0.0f, 0.0f);
+	tri = Triangle(b,h);
+	pos = Vector2D(x, y);
 	tri.setPosition(pos);
 	triangles.push_back(tri);
 }
 void AssignmentApp::addSquare(float b, float h, float x, float y) {
-	Vector2D pos = Vector2D(0.5f, 0.0f);
+	Vector2D pos;
 	Square sq;
-	sq = Square(0.2f, 0.2f);
-	pos = Vector2D(0.0f, 0.0f);
+	sq = Square(b,h);
+	pos = Vector2D(x, y);
 	sq.setPosition(pos);
 	squares.push_back(sq);
 }
@@ -58,24 +60,32 @@ AssignmentApp::Setup()
 {
 	Display::Window* window = this->window;
 	window->SetKeyPressFunction([this](int key, int, int action, int mod) {
+		
+		cout << "key = " << key << endl;
+		cout << "action = " << action << endl;
+		cout << "mod = " << mod << endl;
+		
+		float rand_x = 2.0f*((float)rand())/RAND_MAX - 1.0f;
+		float rand_y = 2.0f*((float)rand()) / RAND_MAX - 1.0f;
+		cout << "rand_x = " << rand_x << " rand_y = " << rand_y << endl;
 
-		if (key == 49) {
-			addSquare(0.2f, 0.2f, 0.0f, 0.0f);
+		if (key == 49 && action == 1) {
+			AssignmentApp::addSquare(0.2f, 0.2f, rand_x, rand_y);
 		}
-		if (key == 50) {
-			addTriangle(0.2f, 0.2f, 0.0f, 0.0f);
+		if (key == 50 && action == 1) {
+			AssignmentApp::addTriangle(0.2f, 0.2f, rand_x, rand_y);
 		}
-		if (key == 51) {
-			addCircle(0.2f, 0.0f, 0.0f);
+		if (key == 51 && action == 1) {
+			AssignmentApp::addCircle(0.2f, rand_x, rand_y);
 		}
-		if (key == 113) {
-			squares.clear();
+		if ((key == 113 || key == 81) && action == 1) {
+			AssignmentApp::squares.clear();
 		}
-		if (key == 119) {
-			triangles.clear();
+		if ((key == 119 || key == 87) && action == 1) {
+			AssignmentApp::triangles.clear();
 		}
-		if (key == 101) {
-			circles.clear();
+		if ((key == 101 || key == 69) && action == 1) {
+			AssignmentApp::circles.clear();
 		}
 	}
 	);
@@ -100,7 +110,7 @@ AssignmentApp::Update()
 		Triangle t_ptr = triangles.at(n);
 		t_ptr.update();
 	}
-	AssignmentApp::PrintText("triangle", 0.5f, 0.5f);
+	//AssignmentApp::PrintText("triangle", 0.5f, 0.5f);
 }
 
 } // namespace Assignment

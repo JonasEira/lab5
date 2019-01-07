@@ -61,7 +61,6 @@ float Vector2D::dot(Vector2D a, Vector2D b)
 
 Vector2D Vector2D::operator=(Vector2D & vector)
 {
-	cout << "Assignment" << endl;
 	if (this != &vector) { 
 		copy(vector.v, vector.v + 2, v);
 	}

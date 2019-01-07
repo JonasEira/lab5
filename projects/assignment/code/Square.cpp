@@ -52,7 +52,6 @@ void Square::drawLines() {
 	lines.at(3).y2 = position.getY();
 	lines.at(3).c1 = App2D::BaseApp::Colour(red, green, blue);
 	lines.at(3).c2 = App2D::BaseApp::Colour(red, green, blue);
-	std::cout << "Drawlines square" << std::endl;
 	for (App2D::BaseApp::LineData line : lines) {
 		Assignment::AssignmentApp::DrawLine(line);
 	}

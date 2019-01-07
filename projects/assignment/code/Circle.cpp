@@ -25,14 +25,15 @@ void Circle::drawLines()
 {
 	
 	Matrix2D rad = Matrix2D(this->radius, 0.0f, 0.0f, 0.0f);
+	Matrix2D trans = translate(position, rad);
 	Matrix2D rot;
 	
 	float radians = 15.0f * 3.14159f / 180.0f;
 	for (int n = 0; n < 25; n++) {
-		rot = rad.rotate(radians);
+		rot = trans.rotate(radians);
 		App2D::BaseApp::LineData l;
-		l.x1 = rad.getData(0, 0);
-		l.y1 = rad.getData(1, 1);
+		l.x1 = trans.getData(0, 0);
+		l.y1 = trans.getData(1, 1);
 		l.x2 = rot.getData(0, 0);
 		l.y2 = rot.getData(1, 1);
 		lines.push_back(l);

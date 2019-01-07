@@ -16,7 +16,6 @@ public:
 	
 	void setData(float x1, float y1, float x2, float y2);
 	
-	Matrix2D transform(Vector2D &v, Matrix2D &m);
 
 	Matrix2D rotate(float radians);
 
@@ -29,4 +28,5 @@ public:
 };
 void transpose(Matrix2D &m);
 Matrix2D unity();
+Matrix2D translate(Vector2D &v, Matrix2D &m);
 
