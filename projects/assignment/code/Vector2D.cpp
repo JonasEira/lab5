@@ -65,6 +65,15 @@ Vector2D Vector2D::rotate(float radians)
 	
 }
 
+Vector2D Vector2D::translate(Vector2D& vec)
+{
+	Vector2D v = Vector2D(
+		vec.getX() + this->getX(),
+		vec.getY() + this->getY()
+	);
+	return v;
+}
+
 float Vector2D::dot(Vector2D a, Vector2D b)
 {
 	return a.getX()*b.getX() + a.getY()*b.getY();

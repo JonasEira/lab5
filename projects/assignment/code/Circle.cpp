@@ -33,26 +33,25 @@ void Circle::update()
 
 void Circle::drawLines() 
 {
-	
-	Matrix2D rad = Matrix2D(this->radius, 0.0f, 0.0f, 0.0f);
-	Matrix2D rot;
-	Matrix2D trans_rot;
-	Matrix2D trans_rad;
-	
+	Vector2D vec = Vector2D(this->radius, 0.0f);
+	Vector2D rot_v;
+	Vector2D trans_rot_v;
+	Vector2D trans_vec;
+
 	float radians = 15.0f * 3.14159f / 180.0f;
 	for (int n = 0; n < 25; n++) {
-		rot = rad.rotate(radians);
-		trans_rot = translate(position, rot);
-		trans_rad = translate(position, rad);
+		rot_v = vec.rotate(radians);
+		trans_rot_v = rot_v.translate(position);
+		trans_vec = vec.translate(position);
 		App2D::BaseApp::LineData l;
-		l.x1 = trans_rad.getData(0, 0);
-		l.y1 = trans_rad.getData(1, 1);
+		l.x1 = trans_vec.getX();
+		l.y1 = trans_vec.getY();
 		l.c1 = c;
-		l.x2 = trans_rot.getData(0, 0);
-		l.y2 = trans_rot.getData(1, 1);
+		l.x2 = trans_rot_v.getX();
+		l.y2 = trans_rot_v.getY();
 		l.c2 = c;
 		lines.push_back(l);
-		rad = rot;
+		vec = rot_v;
 	}
 
 	for (App2D::BaseApp::LineData line : lines) {
