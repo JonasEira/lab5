@@ -52,6 +52,7 @@ void AssignmentApp::addTriangle(float b, float h, float x, float y) {
 	tri.setColor(red, green, blue);
 	pos = Vector2D(x, y);
 	tri.setPosition(pos);
+	tri.setRotation(2.0f*3.1415f*rand() / 100000.0f);
 	triangles.push_back(tri);
 }
 void AssignmentApp::addSquare(float b, float h, float x, float y) {

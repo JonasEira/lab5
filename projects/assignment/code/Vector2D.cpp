@@ -11,6 +11,7 @@ Vector2D::Vector2D(float x, float y)
 {
 	this->v[0] = x;
 	this->v[1] = y;
+	this->v[2] = 1;
 }
 
 Vector2D::~Vector2D()

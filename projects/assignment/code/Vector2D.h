@@ -5,7 +5,7 @@ class Vector2D
 private:
 
 public:
-	float v[2];
+	float v[3];
 	Vector2D();
 	Vector2D(float x, float y);
 	~Vector2D();
