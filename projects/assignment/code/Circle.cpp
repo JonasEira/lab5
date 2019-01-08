@@ -21,6 +21,11 @@ void Circle::setPosition(Vector2D v)
 	this->position = Vector2D(v.getX() - this->radius / 2.0f, v.getY() - this->radius / 2.0f);
 }
 
+void Circle::setRotation(float rot)
+{
+	this->rotation = rot;
+}
+
 void Circle::update()
 {
 	drawLines();

@@ -19,6 +19,7 @@ public:
 	Vector2D operator-(Vector2D &v);
 	Vector2D operator*(Vector2D &v);
 
+	Vector2D rotate(float radians);
 	float dot(Vector2D a, Vector2D b);
 	Vector2D operator=(Vector2D &vector);
 

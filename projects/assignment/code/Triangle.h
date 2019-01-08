@@ -13,6 +13,7 @@ public:
 	Triangle();
 	Triangle(float b, float h);
 	void setColor(float r, float g, float b);
+	void setRotation(float rot);
 	void setPosition(Vector2D v);
 	void update();
 	void drawLines();

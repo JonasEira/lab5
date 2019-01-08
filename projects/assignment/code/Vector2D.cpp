@@ -54,6 +54,16 @@ Vector2D Vector2D::operator*(Vector2D & v)
 	return vec;
 }
 
+Vector2D Vector2D::rotate(float radians)
+{
+	Vector2D v = Vector2D(
+			this->getX() * cos(radians) - this->getY() * sin(radians),
+			this->getX() * sin(radians) + this->getY() * cos(radians)
+		);
+		return v;
+	
+}
+
 float Vector2D::dot(Vector2D a, Vector2D b)
 {
 	return a.getX()*b.getX() + a.getY()*b.getY();

@@ -8,7 +8,7 @@ class Shape
 public:
 	App2D::BaseApp::Colour c;
 	Vector2D position;
-	Matrix2D rotation;
+	float rotation;
 	
 	virtual void drawLines();
 	virtual void setPosition(Vector2D v);

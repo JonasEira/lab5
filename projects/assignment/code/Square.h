@@ -18,6 +18,7 @@ public:
 	
 	void setColor(float r, float g, float b);
 	void setPosition(Vector2D v);
+	void setRotation(float rot);
 	void update();
 	void drawLines();
 

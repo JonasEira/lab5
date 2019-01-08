@@ -64,6 +64,7 @@ void AssignmentApp::addSquare(float b, float h, float x, float y) {
 	float blue = rand() / 100000.0f;
 	sq.setColor(red, green, blue);
 	sq.setPosition(pos);
+	sq.setRotation(2.0f*3.1415f*rand() / 100000.0f);
 	squares.push_back(sq);
 }
 
