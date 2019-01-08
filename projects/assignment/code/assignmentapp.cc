@@ -35,13 +35,21 @@ void AssignmentApp::addCircle(float r, float x, float y) {
 	Circle circle;
 	circle = Circle(r);
 	pos = Vector2D(x, y);
+	float red = rand() / 100000.0f;
+	float green = rand() / 100000.0f;
+	float blue = rand() / 100000.0f;
+	circle.setColor(red, green, blue);
 	circle.setPosition(pos);
-	circles.emplace_back(circle);
+	circles.push_back(circle);
 }
 void AssignmentApp::addTriangle(float b, float h, float x, float y) {
 	Vector2D pos;
 	Triangle tri;
+	float red = rand() / 100000.0f;
+	float green = rand() / 100000.0f;
+	float blue = rand() / 100000.0f;
 	tri = Triangle(b,h);
+	tri.setColor(red, green, blue);
 	pos = Vector2D(x, y);
 	tri.setPosition(pos);
 	triangles.push_back(tri);
@@ -51,6 +59,10 @@ void AssignmentApp::addSquare(float b, float h, float x, float y) {
 	Square sq;
 	sq = Square(b,h);
 	pos = Vector2D(x, y);
+	float red = rand() / 100000.0f;
+	float green = rand() / 100000.0f;
+	float blue = rand() / 100000.0f;
+	sq.setColor(red, green, blue);
 	sq.setPosition(pos);
 	squares.push_back(sq);
 }
@@ -61,13 +73,14 @@ AssignmentApp::Setup()
 	Display::Window* window = this->window;
 	window->SetKeyPressFunction([this](int key, int, int action, int mod) {
 		
-		cout << "key = " << key << endl;
+		/*cout << "key = " << key << endl;
 		cout << "action = " << action << endl;
-		cout << "mod = " << mod << endl;
+		cout << "mod = " << mod << endl;*/
 		
-		float rand_x = 2.0f*((float)rand())/RAND_MAX - 1.0f;
+		float rand_x = 2.0f*((float)rand()) / RAND_MAX - 1.0f;
 		float rand_y = 2.0f*((float)rand()) / RAND_MAX - 1.0f;
-		cout << "rand_x = " << rand_x << " rand_y = " << rand_y << endl;
+
+		//cout << "rand_x = " << rand_x << " rand_y = " << rand_y << endl;
 
 		if (key == 49 && action == 1) {
 			AssignmentApp::addSquare(0.2f, 0.2f, rand_x, rand_y);

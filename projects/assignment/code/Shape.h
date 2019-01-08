@@ -6,9 +6,7 @@
 class Shape
 {
 public:
-	float red = 1.0f;
-	float green = 1.0f;
-	float blue = 0.0f;
+	App2D::BaseApp::Colour c;
 	Vector2D position;
 	Matrix2D rotation;
 	

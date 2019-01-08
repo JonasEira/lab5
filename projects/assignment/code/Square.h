@@ -16,6 +16,7 @@ public:
 	Square();
 	Square(float width, float height);
 	
+	void setColor(float r, float g, float b);
 	void setPosition(Vector2D v);
 	void update();
 	void drawLines();

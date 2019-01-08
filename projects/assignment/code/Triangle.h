@@ -12,6 +12,7 @@ public:
 	vector<App2D::BaseApp::LineData> lines;
 	Triangle();
 	Triangle(float b, float h);
+	void setColor(float r, float g, float b);
 	void setPosition(Vector2D v);
 	void update();
 	void drawLines();

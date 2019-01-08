@@ -78,8 +78,11 @@ void transpose(Matrix2D & m)
 Matrix2D translate(Vector2D & v, Matrix2D & m)
 {
 	Matrix2D vect;
-	vect.setData(v.getX(), 0.0, 0.0, v.getY());
-	return vect*m;
+	vect.setData(v.getX()+m.getData(0,0), 
+		v.getY() + m.getData(0,1), 
+		v.getX() + m.getData(1,0), 
+		v.getY() + m.getData(1,1));
+	return vect;
 }
 
 Matrix2D unity()

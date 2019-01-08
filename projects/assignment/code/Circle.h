@@ -11,6 +11,7 @@ public:
 	vector<App2D::BaseApp::LineData> lines;
 	Circle();
 	Circle(float r);
+	void setColor(float r, float g, float b);
 	void setPosition(Vector2D v);
 	void update();
 	void drawLines();
