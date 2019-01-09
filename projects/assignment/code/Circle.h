@@ -12,7 +12,7 @@ public:
 	Circle();
 	Circle(float r);
 	void setColor(float r, float g, float b);
-	void setPosition(Vector2D v);
+	void setPosition(Vector2D& v);
 	void setRotation(float f);
 	void update();
 	void drawLines();

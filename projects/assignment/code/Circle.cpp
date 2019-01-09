@@ -16,9 +16,9 @@ void Circle::setColor(float r, float g, float b) {
 	this->c.g = g;
 	this->c.b = b;
 }
-void Circle::setPosition(Vector2D v)
+void Circle::setPosition(Vector2D& v)
 {
-	this->position = Vector2D(v.getX() - this->radius / 2.0f, v.getY() - this->radius / 2.0f);
+	this->position = Vector2D(v);
 }
 
 void Circle::setRotation(float rot)

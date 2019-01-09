@@ -4,7 +4,7 @@
 class Matrix2D
 {
 private:
-	float data[2][2];
+	float data[3][3];
 
 public:
 
@@ -14,7 +14,7 @@ public:
 	
 	void printMatrix();
 	
-	void setData(float x1, float y1, float x2, float y2);
+	void setData(float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3);
 	
 
 	Matrix2D rotate(float radians);
@@ -23,10 +23,10 @@ public:
 	float* getDataPtr();
 
 	Matrix2D & operator*(Matrix2D &m);
-
+	
 	~Matrix2D();
 };
 void transpose(Matrix2D &m);
 Matrix2D unity();
-Matrix2D translate(Vector2D &v, Matrix2D &m);
+Matrix2D translationMatrix(Vector2D &v);
 

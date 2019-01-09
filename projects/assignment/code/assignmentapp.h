@@ -22,7 +22,7 @@ public:
 	vector<Circle> circles;
 	vector<Square> squares;
 	vector<Triangle> triangles;
-
+	Square player;
 	static AssignmentApp& GetInstance()
 	{
 		static AssignmentApp instance;
@@ -41,12 +41,13 @@ public:
 	/// line drawing function
 	static void DrawLine(const LineData & line);
 
-	void addCircle(float r, float x, float y);
+	void addBall(float r, float x, float y);
 
 	void addTriangle(float b, float h, float x, float y);
 
 	void addSquare(float b, float h, float x, float y);
 
+	void addPlayer();
 
 private:
 	/// constructor hidden because it is a singleton

@@ -6,7 +6,7 @@ Square::Square(float width, float height)
 {
 	this->width = width;
 	this->height = height;
-
+	this->rotation = 0.0f;
 }
 
 void Square::setColor(float r, float g, float b) {
@@ -17,7 +17,7 @@ void Square::setColor(float r, float g, float b) {
 
 void Square::setPosition(Vector2D v)
 {
-	this->position = Vector2D(v.getX() - this->width / 2.0f, v.getY() - this->height / 2.0f);
+	this->position = Vector2D(v);
 	/*this->position = Vector2D(v);*/
 }
 
@@ -37,20 +37,23 @@ void Square::drawLines() {
 		lines.push_back(l);
 	}
 
-	Vector2D p1_norm = Vector2D(position.getX(), position.getY());
-	Vector2D p2_norm = Vector2D(position.getX() + width, position.getY());
-	Vector2D p3_norm = Vector2D(position.getX() + width, position.getY() + height);
-	Vector2D p4_norm = Vector2D(position.getX(), position.getY() + height);
 	
+	Vector2D p1_norm = Vector2D(0.0f, 0.0f);
+	Vector2D p2_norm = Vector2D(width, 0.0f);
+	Vector2D p3_norm = Vector2D(width, height);
+	Vector2D p4_norm = Vector2D(0.0f, height);
 	Vector2D p1 = p1_norm.rotate(rotation);
 	Vector2D p2 = p2_norm.rotate(rotation);
 	Vector2D p3 = p3_norm.rotate(rotation);
 	Vector2D p4 = p4_norm.rotate(rotation);
-
-	Matrix2D m1 = Matrix2D(p1.getX(), p1.getY(), p2.getX(), p2.getY());
-	Matrix2D m2 = Matrix2D(p2.getX(), p2.getY(), p3.getX(), p3.getY());
-	Matrix2D m3 = Matrix2D(p3.getX(), p3.getY(), p4.getX(), p4.getY());
-	Matrix2D m4 = Matrix2D(p4.getX(), p4.getY(), p1.getX(), p1.getY());
+	Vector2D pt1 = p1.translate(position);
+	Vector2D pt2 = p2.translate(position);
+	Vector2D pt3 = p3.translate(position);
+	Vector2D pt4 = p4.translate(position);
+	Matrix2D m1 = Matrix2D(pt1.getX(), pt1.getY(), pt2.getX(), pt2.getY());
+	Matrix2D m2 = Matrix2D(pt2.getX(), pt2.getY(), pt3.getX(), pt3.getY());
+	Matrix2D m3 = Matrix2D(pt3.getX(), pt3.getY(), pt4.getX(), pt4.getY());
+	Matrix2D m4 = Matrix2D(pt4.getX(), pt4.getY(), pt1.getX(), pt1.getY());
 
 	
 	lines.at(0).x1 = m1.getData(0, 0);

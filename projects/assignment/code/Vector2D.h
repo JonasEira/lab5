@@ -15,6 +15,8 @@ public:
 	void setX(float newX);
 	float getY();
 	void setY(float newY);
+	float getZ();
+	void setZ(float newZ);
 	Vector2D operator+(Vector2D &v);
 	Vector2D operator-(Vector2D &v);
 	Vector2D operator*(Vector2D &v);

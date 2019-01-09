@@ -18,7 +18,7 @@ Vector2D::~Vector2D()
 {
 }
 
-
+//-- X - pair
 float Vector2D::getX() {
 	return this->v[0];
 }
@@ -26,6 +26,7 @@ void Vector2D::setX(float newX)
 {
 	this->v[0] = newX;
 }
+//-- Y - pair
 float Vector2D::getY() {
 	return this->v[1];
 }
@@ -34,6 +35,16 @@ void Vector2D::setY(float newY)
 {
 	this->v[1] = newY;
 }
+//-- Z - pair
+void Vector2D::setZ(float newZ)
+{
+	this->v[0] = newZ;
+}
+
+float Vector2D::getZ() {
+	return this->v[2];
+}
+// --
 
 Vector2D Vector2D::operator+(Vector2D & v)
 {
@@ -58,11 +69,11 @@ Vector2D Vector2D::operator*(Vector2D & v)
 Vector2D Vector2D::rotate(float radians)
 {
 	Vector2D v = Vector2D(
-			this->getX() * cos(radians) - this->getY() * sin(radians),
-			this->getX() * sin(radians) + this->getY() * cos(radians)
-		);
-		return v;
-	
+		this->getX() * cos(radians) - this->getY() * sin(radians),
+		this->getX() * sin(radians) + this->getY() * cos(radians)
+	);
+	return v;
+
 }
 
 Vector2D Vector2D::translate(Vector2D& vec)
@@ -81,7 +92,7 @@ float Vector2D::dot(Vector2D a, Vector2D b)
 
 Vector2D Vector2D::operator=(Vector2D & vector)
 {
-	if (this != &vector) { 
+	if (this != &vector) {
 		copy(vector.v, vector.v + 2, v);
 	}
 	return *this;
@@ -101,7 +112,9 @@ bool & Vector2D::operator!=(Vector2D & b)
 
 void Vector2D::printVector()
 {
-	cout << "Vector X=" << this->getX() << " Y=" << this->getY() << endl;
+	cout << "Vector X=" << this->getX() 
+		<< " Y=" << this->getY()
+		<< " Z=" << this->getZ() << endl;
 }
 
 
