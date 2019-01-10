@@ -15,7 +15,7 @@ public:
 	void setPosition(Vector2D& v);
 	void setVelocity(Vector2D& v);
 	void setRotation(float f);
-	Vector2D getUpdatedVelocity(Vector2D v);
+	Vector2D checkOutsideArea(Vector2D v, Matrix2D area);
 	void update();
 	void drawLines();
 	~Circle();

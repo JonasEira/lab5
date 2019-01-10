@@ -62,9 +62,9 @@ Vector2D Vector2D::operator-(Vector2D & v)
 	return vec;
 }
 
-Vector2D Vector2D::operator*(Vector2D & v)
+float Vector2D::operator*(Vector2D & v)
 {
-	Vector2D vec = Vector2D(v.getX()*this->getY(), v.getY()*this->getX());
+	float vec = dot(*this, v);
 	return vec;
 }
 

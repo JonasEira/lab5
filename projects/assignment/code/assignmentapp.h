@@ -43,8 +43,6 @@ public:
 
 	void addBall(float r, float x, float y);
 
-	void addTriangle(float b, float h, float x, float y);
-
 	void addSquare(float b, float h, float x, float y);
 
 	void addPlayer();

@@ -19,7 +19,7 @@ public:
 	void setZ(float newZ);
 	Vector2D operator+(Vector2D &v);
 	Vector2D operator-(Vector2D &v);
-	Vector2D operator*(Vector2D &v);
+	float operator*(Vector2D &v);
 	Vector2D operator*(float n);
 	Vector2D rotate(float radians);
 	Vector2D translate(Vector2D& vec);

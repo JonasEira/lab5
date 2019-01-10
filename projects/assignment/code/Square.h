@@ -11,7 +11,7 @@ class Square :
 public:
 	float width;
 	float height;
-	
+	bool enabled;
 	vector<App2D::BaseApp::LineData> lines;
 	Square();
 	Square(float width, float height);

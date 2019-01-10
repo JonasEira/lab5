@@ -37,35 +37,57 @@ void Circle::update()
 {
 	Vector2D newPos = position.translate(velocity);
 	Vector2D newVelocity;
-	newVelocity = getUpdatedVelocity(newPos);
+	Matrix2D area = Matrix2D(1.0f, -1.0f, 1.0f, -1.0f);
+	newVelocity = checkOutsideArea(newPos, area);
+	this->setVelocity(newVelocity);
 	this->setPosition(newPos);
 }
 
-Vector2D Circle::getUpdatedVelocity(Vector2D v) {
+Vector2D Circle::checkOutsideArea(Vector2D v, Matrix2D area) {
 	Vector2D newPos;
 	newPos = v;
 	Vector2D newVelocity = velocity;
 	Vector2D norm;
-	if (newPos.getX() > 1.0f && velocity.getX() > 0) {
+	if (newPos.getX() > area.getData(0,0) && velocity.getX() > 0) {
 		norm = Vector2D(-1.0f, 0.0f);
-		newVelocity = velocity - ((velocity - norm)*norm) * 2.0f;
-		this->setVelocity(newVelocity);
+		float vn = velocity*norm;
+		float nn = norm * norm;
+		float quota = 2.0f * vn / nn;
+		Vector2D otherMult = norm*quota;
+		newVelocity = otherMult - velocity;
 	}
-	if (newPos.getX() < -1.0f && velocity.getX() < 0) {
+	if (newPos.getX() < area.getData(1,0) && velocity.getX() < 0) {
 		norm = Vector2D(1.0f, 0.0f);
-		newVelocity = velocity - ((velocity - norm)*norm) * 2.0f;
-		this->setVelocity(newVelocity);		
+		float vn = velocity * norm;
+		float nn = norm * norm;
+		float quota = 2 * vn / nn;
+		Vector2D otherMult = norm * quota;
+		newVelocity = otherMult - velocity;
 	}
-	if (newPos.getY() > 1.0f && velocity.getY() > 0) {
+	if (newPos.getY() > area.getData(1, 0) && velocity.getY() > 0) {
 		norm = Vector2D(0.0f, -1.0f);
-		newVelocity = velocity - ((velocity - norm)*norm) * 2.0f;
-		this->setVelocity(newVelocity);
+		float vn = velocity * norm;
+		float nn = norm * norm;
+		float quota = 2 * vn / nn;
+		Vector2D otherMult = norm * quota;
+		newVelocity = otherMult - velocity;
 	}
-	if (newPos.getY() < -1.0f && velocity.getY() < 0) {
+	if (newPos.getY() < area.getData(1, 1) && velocity.getY() < 0) {
 		norm = Vector2D(0.0f, 1.0f);
-		newVelocity = velocity - ((velocity - norm)*norm) * 2.0f;
-		this->setVelocity(newVelocity);
+		float vn = velocity * norm;
+		float nn = norm * norm;
+		float quota = 2 * vn / nn;
+		Vector2D otherMult = norm * quota;
+		newVelocity =  otherMult - velocity;
 	}
+	App2D::BaseApp::LineData l;
+	l.x1 = 0.0f;
+	l.y1 = 0.0f;
+	l.c1 = c;
+	l.x2 = newVelocity.getX();
+	l.y2 = newVelocity.getY();
+	l.c2 = c;
+	Assignment::AssignmentApp::DrawLine(l);
 	return newVelocity;
 }
 
