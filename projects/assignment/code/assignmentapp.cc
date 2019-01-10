@@ -36,25 +36,13 @@ namespace Assignment
 		Circle circle;
 		circle = Circle(r);
 		pos = Vector2D(x, y);
-		vel = Vector2D(0.1f, 0.1f);
 		circle.setColor(1.0f, 1.0f, 1.0f);
 		circle.setPosition(pos);
+		vel = Vector2D(0.01f, 0.015f);
 		circle.velocity = vel;
 		circles.push_back(circle);
 	}
-	void AssignmentApp::addTriangle(float b, float h, float x, float y) {
-		Vector2D pos;
-		Triangle tri;
-		float red = rand() / 100000.0f;
-		float green = rand() / 100000.0f;
-		float blue = rand() / 100000.0f;
-		tri = Triangle(b, h);
-		tri.setColor(red, green, blue);
-		pos = Vector2D(x, y);
-		tri.setPosition(pos);
-		tri.setRotation(2.0f*3.1415f*rand() / 100000.0f);
-		triangles.push_back(tri);
-	}
+
 	void AssignmentApp::addSquare(float b, float h, float x, float y) {
 		Vector2D pos;
 		Square sq;
@@ -62,6 +50,8 @@ namespace Assignment
 		pos = Vector2D(x, y);
 		sq.setColor(1.0f, 1.0f, 1.0f);
 		sq.setPosition(pos);
+		sq.velocity = Vector2D(0.0f, 0.0f);
+		sq.setRotation(0.0f);
 		squares.push_back(sq);
 	}
 
@@ -75,6 +65,7 @@ namespace Assignment
 		pos = Vector2D(x, y);
 		this->player.setColor(1.0f, 1.0f, 1.0f);
 		this->player.setPosition(pos);
+		this->player.setRotation(0.0f);
 		this->player.velocity = Vector2D(0.0f, 0.0f);
 	}
 
@@ -88,7 +79,8 @@ namespace Assignment
 		float spacing = 0.01f;
 		int n_squares = 17;
 
-		addPlayer();
+		AssignmentApp::addPlayer();
+		AssignmentApp::addBall(0.02f, 0.0f, 0.0f);
 
 		for (int n = 0; n < n_squares; n++) {
 			x = n*(squareWidth + spacing) - n_squares*(squareWidth + spacing)/2.0f;
@@ -96,26 +88,29 @@ namespace Assignment
 			addSquare(squareWidth, squareHeight, x, y);
 		}
 
-		addBall(0.02f, 0.0f, -0.5f);
 
 		Display::Window* window = this->window;
 		window->SetKeyPressFunction([this](int key, int, int action, int mod) {
 
-			cout << "key = " << key << endl;
+			/*cout << "key = " << key << endl;
 			cout << "action = " << action << endl;
-			cout << "mod = " << mod << endl;
+			cout << "mod = " << mod << endl;*/
 
 			if (key == 262 && action == 1) {
-				player.velocity.setX(0.015f);
+				Vector2D* v = &player.velocity;
+				v->setX(0.015f);
 			}
 			if (key == 262 && action == 0) {
-				player.velocity.setX(0.0f);
+				Vector2D* v = &player.velocity;
+				v->setX(0.0f);
 			}
 			if (key == 263 && action == 1) {
-				player.velocity.setX(-0.015f);
+				Vector2D* v = &player.velocity;
+				v->setX(-0.015f);
 			}
 			if (key == 263 && action == 0) {
-				player.velocity.setX(0.0f);
+				Vector2D* v = &player.velocity;
+				v->setX(0.0f);
 			}
 		}
 		);
@@ -128,22 +123,19 @@ namespace Assignment
 	void
 		AssignmentApp::Update()
 	{
-		Vector2D player_p = player.position;
-		Vector2D newPos = player_p.translate(player.velocity);
-		player.setPosition(newPos);
+		
 		player.update();
-
+		player.drawLines();
 		for (int n = 0; n < squares.size(); n++) {
-			Square s = squares.at(n);
-			s.update();
+			Square* s = &squares.at(n);
+			s->drawLines();
+			s->update();
 		}
-
+		
 		for (int n = 0; n < circles.size(); n++) {
-			Circle c = circles.at(n);
-			Vector2D position = c.position;
-			Vector2D newPos = position.translate(c.velocity);
-			c.setPosition(newPos);
-			c.update();
+			Circle* c = &circles.at(n);
+			c->update(); 
+			c->drawLines();
 		}
 	}
 

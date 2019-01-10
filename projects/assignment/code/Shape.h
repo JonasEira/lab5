@@ -7,12 +7,13 @@ class Shape
 {
 public:
 	App2D::BaseApp::Colour c;
-	Vector2D position;
 	float rotation;
+	Vector2D position;
 	Vector2D velocity;
 
 	virtual void drawLines();
-	virtual void setPosition(Vector2D v);
+	virtual void setPosition(Vector2D& v);
+	virtual void setVelocity(Vector2D& v);
 	virtual void update();
 
 	Shape();

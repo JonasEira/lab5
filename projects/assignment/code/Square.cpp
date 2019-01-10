@@ -6,7 +6,6 @@ Square::Square(float width, float height)
 {
 	this->width = width;
 	this->height = height;
-	this->rotation = 0.0f;
 }
 
 void Square::setColor(float r, float g, float b) {
@@ -15,10 +14,15 @@ void Square::setColor(float r, float g, float b) {
 	this->c.b = b;
 }
 
-void Square::setPosition(Vector2D v)
+void Square::setPosition(Vector2D& v)
 {
 	this->position = Vector2D(v);
-	/*this->position = Vector2D(v);*/
+
+}
+
+void Square::setVelocity(Vector2D & v)
+{
+	this->velocity = Vector2D(v);
 }
 
 void Square::setRotation(float rot)
@@ -28,10 +32,14 @@ void Square::setRotation(float rot)
 
 void Square::update()
 {
-	drawLines();
+	
 }
 
 void Square::drawLines() {
+	
+	Vector2D newPos = position.translate(velocity);
+	this->setPosition(newPos);
+
 	for (int n = 0; n < 4; n++) {
 		App2D::BaseApp::LineData l;
 		lines.push_back(l);

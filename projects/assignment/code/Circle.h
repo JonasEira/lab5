@@ -13,7 +13,9 @@ public:
 	Circle(float r);
 	void setColor(float r, float g, float b);
 	void setPosition(Vector2D& v);
+	void setVelocity(Vector2D& v);
 	void setRotation(float f);
+	Vector2D getUpdatedVelocity(Vector2D v);
 	void update();
 	void drawLines();
 	~Circle();

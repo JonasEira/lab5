@@ -4,7 +4,9 @@
 
 Vector2D::Vector2D()
 {
-
+	this->v[0] = 1;
+	this->v[1] = 1;
+	this->v[2] = 1;
 }
 
 Vector2D::Vector2D(float x, float y)
@@ -66,6 +68,14 @@ Vector2D Vector2D::operator*(Vector2D & v)
 	return vec;
 }
 
+Vector2D Vector2D::operator*(float n)
+{
+	Vector2D v;
+	v.setX(n*this->getX());
+	v.setY(n*this->getY());
+	return v;
+}
+
 Vector2D Vector2D::rotate(float radians)
 {
 	Vector2D v = Vector2D(
@@ -73,7 +83,6 @@ Vector2D Vector2D::rotate(float radians)
 		this->getX() * sin(radians) + this->getY() * cos(radians)
 	);
 	return v;
-
 }
 
 Vector2D Vector2D::translate(Vector2D& vec)
@@ -93,7 +102,7 @@ float Vector2D::dot(Vector2D a, Vector2D b)
 Vector2D Vector2D::operator=(Vector2D & vector)
 {
 	if (this != &vector) {
-		copy(vector.v, vector.v + 2, v);
+		copy(vector.v, vector.v + 3, v);
 	}
 	return *this;
 }
