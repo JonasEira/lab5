@@ -105,6 +105,7 @@ namespace Assignment
 			t_ptr.update();
 		}
 
+			
 		/*sq.update();
 		for (App2D::BaseApp::LineData line : sq.lines) {
 			AssignmentApp::DrawLine(line);

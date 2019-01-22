@@ -92,25 +92,59 @@ namespace Assignment
 		Display::Window* window = this->window;
 		window->SetKeyPressFunction([this](int key, int, int action, int mod) {
 
-			/*cout << "key = " << key << endl;
+			cout << "key = " << key << endl;
 			cout << "action = " << action << endl;
-			cout << "mod = " << mod << endl;*/
+			cout << "mod = " << mod << endl;
 
-			if (key == 262 && action == 1) {
+			if (key == 68 && action == 1) {
 				Vector2D* v = &player.velocity;
 				v->setX(0.015f);
 			}
-			if (key == 262 && action == 0) {
+			if (key == 68 && action == 0) {
 				Vector2D* v = &player.velocity;
 				v->setX(0.0f);
 			}
-			if (key == 263 && action == 1) {
+			if (key == 65 && action == 1) {
 				Vector2D* v = &player.velocity;
 				v->setX(-0.015f);
 			}
-			if (key == 263 && action == 0) {
+			if (key == 65 && action == 0) {
 				Vector2D* v = &player.velocity;
 				v->setX(0.0f);
+			}
+			if (key == 69 && action == 0) {
+				float x = 2.0f * rand() / 100000.0 - 1.0f;
+				float y = 2.0f * rand() / 100000.0 - 1.0f;
+				addBall(0.05, x, y);
+			}
+			if (key == 81 && action == 0) {
+				Vector2D* p = &player.position;
+				p->setX(0.0f);
+				p->setY(-0.8f);
+
+				for (int i = 0; i < circles.size(); i++)
+				{
+					Vector2D* b = &circles.at(i).position;
+					b->setX(0.0f);
+					b->setY(0.0f);
+					Vector2D* ballv = &circles.at(i).velocity;
+					float x = rand() / 100000.0f;
+					float y = rand() / 100000.0f;
+					ballv->setX(0.009f*x - 0.0045f);
+					ballv->setY(0.009f*y);
+				}
+				for (int n = 0; n < squares.size(); n++) {
+					Square* s = &squares.at(n);
+					s->enabled = true;
+				}
+				OUTSIDE = false;
+				WIN = false;
+			}
+			if (key == 82 && action == 0) {
+				for (int n = 0; n < squares.size(); n++) {
+					Square* s = &squares.at(n);
+					s->enabled = false;
+				}
 			}
 		}
 		);
@@ -132,6 +166,16 @@ namespace Assignment
 		return false;
 	}
 
+	Matrix2D AssignmentApp::getSquareBounds(Square* sq) {
+		Matrix2D area = Matrix2D(
+			sq->position.getX(),
+			sq->position.getX() + sq->width,
+			sq->position.getY(),
+			sq->position.getY() + sq->height
+		);
+		return area;
+	}
+
 	//------------------------------------------------------------------------------
 	/**
 	*/
@@ -139,29 +183,53 @@ namespace Assignment
 		AssignmentApp::Update()
 	{
 
-		player.update();
-		player.drawLines();
-		;
-		for (int n = 0; n < squares.size(); n++) {
-			Square* s = &squares.at(n);
+
+		if (WIN == false && !OUTSIDE) {
+			player.update();
+			player.drawLines();
+			Matrix2D playerArea = getSquareBounds(&player);
 			for (int n = 0; n < circles.size(); n++) {
 				Circle* c = &circles.at(n);
-
-				if (isInside(*s, *c)) {
-					s->enabled = false;
-					
+				if (isInside(player, *c)) {
+					Vector2D v = c->getReflectionVector(c->position, playerArea);
+					c->setVelocity(v);
 				}
-				else {
+				if (c->position.getY() < -1.0f) {
+					OUTSIDE = true;
+				}
+				c->update();
+				c->drawLines();
+			}
+			bool allFalse = true;
+			for (int n = 0; n < squares.size(); n++) {
+				Square* s = &squares.at(n);
+				Matrix2D squareArea = getSquareBounds(s);
+				for (int n = 0; n < circles.size(); n++) {
+					Circle* c = &circles.at(n);
+					if (isInside(*s, *c) && s->enabled) {
+						s->enabled = false;
+						Vector2D v = c->getReflectionVector(c->position, squareArea);
+						c->setVelocity(v);
+					}
+					
 					s->update();
 					s->drawLines();
 				}
+				allFalse = allFalse && !s->enabled;
 			}
+			WIN = allFalse;
 		}
-
-		for (int n = 0; n < circles.size(); n++) {
-			Circle* c = &circles.at(n);
-			c->update();
-			c->drawLines();
+		else if (OUTSIDE) {
+			float r = rand() / 100000.0f;
+			float g = rand() / 100000.0f;
+			float b = rand() / 100000.0f;
+			AssignmentApp::PrintText("GAME OVER", 0.20f, 0.5f, 155.0f, Colour(r, g, b));
+		}
+		else {
+			float r = rand() / 100000.0f;
+			float g = rand() / 100000.0f;
+			float b = rand() / 100000.0f;
+			AssignmentApp::PrintText("YOU WIN", 0.3f, 0.5f, 155.0f, Colour(r, g, b));
 		}
 	}
 

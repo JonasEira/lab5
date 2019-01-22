@@ -55,6 +55,10 @@ private:
 	/// also hidden because of the singleton
 	void operator=(AssignmentApp const &);
 
+	Matrix2D AssignmentApp::getSquareBounds(Square* sq);
+
+	bool WIN = false;
+	bool OUTSIDE = false;
 };
 
 //------------------------------------------------------------------------------

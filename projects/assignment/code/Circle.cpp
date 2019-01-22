@@ -38,12 +38,12 @@ void Circle::update()
 	Vector2D newPos = position.translate(velocity);
 	Vector2D newVelocity;
 	Matrix2D area = Matrix2D(1.0f, -1.0f, 1.0f, -1.0f);
-	newVelocity = checkOutsideArea(newPos, area);
+	newVelocity = getReflectionVector(newPos, area);
 	this->setVelocity(newVelocity);
 	this->setPosition(newPos);
 }
 
-Vector2D Circle::checkOutsideArea(Vector2D v, Matrix2D area) {
+Vector2D Circle::getReflectionVector(Vector2D v, Matrix2D area) {
 	Vector2D newPos;
 	newPos = v;
 	Vector2D newVelocity = velocity;
@@ -56,7 +56,7 @@ Vector2D Circle::checkOutsideArea(Vector2D v, Matrix2D area) {
 		Vector2D otherMult = norm*quota;
 		newVelocity = otherMult - velocity;
 	}
-	if (newPos.getX() < area.getData(1,0) && velocity.getX() < 0) {
+	if (newPos.getX() <= area.getData(0,1) && velocity.getX() < 0) {
 		norm = Vector2D(1.0f, 0.0f);
 		float vn = velocity * norm;
 		float nn = norm * norm;
@@ -64,7 +64,7 @@ Vector2D Circle::checkOutsideArea(Vector2D v, Matrix2D area) {
 		Vector2D otherMult = norm * quota;
 		newVelocity = otherMult - velocity;
 	}
-	if (newPos.getY() > area.getData(1, 0) && velocity.getY() > 0) {
+	if (newPos.getY() > area.getData(1,0) && velocity.getY() > 0) {
 		norm = Vector2D(0.0f, -1.0f);
 		float vn = velocity * norm;
 		float nn = norm * norm;
@@ -72,7 +72,7 @@ Vector2D Circle::checkOutsideArea(Vector2D v, Matrix2D area) {
 		Vector2D otherMult = norm * quota;
 		newVelocity = otherMult - velocity;
 	}
-	if (newPos.getY() < area.getData(1, 1) && velocity.getY() < 0) {
+	if (newPos.getY() <= area.getData(1,1) && velocity.getY() < 0) {
 		norm = Vector2D(0.0f, 1.0f);
 		float vn = velocity * norm;
 		float nn = norm * norm;
@@ -80,14 +80,6 @@ Vector2D Circle::checkOutsideArea(Vector2D v, Matrix2D area) {
 		Vector2D otherMult = norm * quota;
 		newVelocity =  otherMult - velocity;
 	}
-	App2D::BaseApp::LineData l;
-	l.x1 = 0.0f;
-	l.y1 = 0.0f;
-	l.c1 = c;
-	l.x2 = newVelocity.getX();
-	l.y2 = newVelocity.getY();
-	l.c2 = c;
-	Assignment::AssignmentApp::DrawLine(l);
 	return newVelocity;
 }
 
@@ -98,7 +90,6 @@ void Circle::drawLines()
 	Vector2D rot_v;
 	Vector2D trans_rot_v;
 	Vector2D trans_vec;
-	velocity.printVector();
 	float radians = 15.0f * 3.14159f / 180.0f;
 	lines.clear();
 	for (int n = 0; n < 25; n++) {
